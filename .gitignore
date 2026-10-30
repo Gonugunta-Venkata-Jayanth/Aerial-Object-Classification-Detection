@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+
+# Virtual environments
+venv/
+.venv/
+
+# Environment / secrets
+.env
+
+# YOLO / training artefacts
+runs/
+*.cache
+
+# Office lock files, IDE, OS
+~$*
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
