@@ -1,4 +1,4 @@
-Model: D:\Internships\labmentix\Aerial Object Classification & Detection\models\classification\best_transfer_model.h5
+Model: models/classification/best_transfer_model.h5
 
               precision    recall  f1-score   support
 

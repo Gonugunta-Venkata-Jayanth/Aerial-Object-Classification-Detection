@@ -29,7 +29,8 @@ if __name__ == "__main__":
     print(report_str)
 
     with open(REPORTS_DIR / "classification_report.txt", "w") as f:
-        f.write("Model: " + str(model_path) + "\n\n")
+        # store a repo-relative path so the report is portable across machines
+        f.write("Model: " + model_path.relative_to(CLASS_MODELS_DIR.parents[1]).as_posix() + "\n\n")
         f.write(report_str)
 
     # confusion matrix
