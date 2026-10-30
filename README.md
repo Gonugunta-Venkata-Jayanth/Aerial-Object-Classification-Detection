@@ -83,6 +83,11 @@ Aerial-Object-Classification-Detection/
 │   ├── accuracy_loss_cnn.png / accuracy_loss_transfer.png
 │   └── yolo_predictions/             # Annotated YOLO predictions on test images
 ├── sample results (custom)/          # Screenshots of the Streamlit app
+├── assets/
+│   ├── sample_bird.jpg               # Sample input image for trying the app
+│   └── streamlit_yolo_detection.png  # Screenshot: YOLOv8 detection on sample_bird.jpg
+├── docs/
+│   └── Project Title.docx            # Project brief / write-up
 ├── src/
 │   ├── config.py                     # Paths, image size, batch size, epochs
 │   ├── data_classification.py        # tf.data pipelines for the classifier
@@ -90,7 +95,7 @@ Aerial-Object-Classification-Detection/
 │   ├── train_cnn.py / train_transfer.py
 │   ├── eval_classification.py
 │   ├── yolo_train.py / yolo_infer.py
-│   └── check_paths.py                # Local path sanity check (Windows path hard-coded)
+│   └── check_paths.py                # Dataset layout sanity check (repo-relative paths)
 ├── streamlit_app/app.py
 ├── yolov8n.pt                        # Base YOLOv8n weights (Git LFS)
 └── requirements.txt
@@ -122,7 +127,7 @@ pip install -r requirements.txt
 streamlit run streamlit_app/app.py
 ```
 
-Open http://localhost:8501, choose **Classification** or **YOLOv8 Detection** in the sidebar and upload a `.jpg` / `.png` image.
+Open http://localhost:8501, choose **Classification** or **YOLOv8 Detection** in the sidebar and upload a `.jpg` / `.png` image (for example [`assets/sample_bird.jpg`](assets/sample_bird.jpg)).
 
 ### 4. Train and evaluate (optional)
 
@@ -130,6 +135,7 @@ The training scripts import `config` as a top-level module, so run them from ins
 
 ```bash
 cd src
+python check_paths.py            # verify the detection dataset layout
 python train_cnn.py              # custom CNN      -> models/classification/best_cnn_model.h5
 python train_transfer.py         # MobileNetV2     -> models/classification/best_transfer_model.h5
 python eval_classification.py    # report + confusion matrix -> reports/
@@ -157,13 +163,15 @@ All numbers below are taken from files committed in this repository.
 |-----------|--------|--------|-----------|
 | 0.861 | 0.704 | 0.795 | 0.510 |
 
-Training curves, PR / F1 curves and confusion matrices are in [`models/detection/yolov8n_birddrone/`](models/detection/yolov8n_birddrone/) and [`reports/`](reports/).
+`args.yaml` in that folder is Ultralytics' record of the original training run (it keeps the author's local Windows paths) and is not read by any script. Training curves, PR / F1 curves and confusion matrices are in [`models/detection/yolov8n_birddrone/`](models/detection/yolov8n_birddrone/) and [`reports/`](reports/).
 
 ### App screenshots
 
 | Classification | Detection |
 |----------------|-----------|
 | ![Classification mode](<sample results (custom)/classificaion.png>) | ![YOLOv8 detection mode](<sample results (custom)/yolo.png>) |
+
+YOLOv8 detection on the bundled sample image: [`assets/streamlit_yolo_detection.png`](assets/streamlit_yolo_detection.png). The project brief is in [`docs/Project Title.docx`](<docs/Project Title.docx>).
 
 ## Dataset
 
